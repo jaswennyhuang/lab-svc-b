@@ -1,0 +1,16 @@
+name: release
+on:
+  push:
+    tags: ['svc-b-v*']
+jobs:
+  release:
+    permissions:
+      contents: read
+    # A release tag goes to staging on the platform's open release branch.
+    uses: jaswennyhuang/lab-ci-templates/.github/workflows/release-build.yml@v1.2.0
+    with:
+      service: svc-b
+      platform_repo: jaswennyhuang/githubflow-lab
+      staging_branch: main
+    secrets:
+      token: ${{ secrets.LAB_TOKEN }}
